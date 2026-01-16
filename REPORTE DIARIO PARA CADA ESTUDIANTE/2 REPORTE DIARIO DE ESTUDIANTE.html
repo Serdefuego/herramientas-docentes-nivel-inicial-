@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Reportes de Estudiante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f8;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007BFF;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 5px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .form-group select,
+        .form-group input[type="text"],
+        .form-group textarea,
+        .form-group input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+        }
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        .form-group input[type="checkbox"] {
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .form-group input[type="checkbox"] + label {
+            display: inline;
+            margin: 0;
+            font-size: 16px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn:active {
+            background-color: #004494;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Reportes de Estudiante</h1>
+        
+        <div class="form-group">
+            <label for="color">Color:</label>
+            <select id="color" onchange="updateStudents()">
+                <option value="">Seleccione un color</option>
+                <option value="Violeta">Violeta</option>
+                <option value="Naranja">Naranja</option>
+                <option value="Verde">Verde</option>
+                <option value="Turquesa">Turquesa</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="turno">Turno:</label>
+            <select id="turno" onchange="updateStudents()">
+                <option value="">Seleccione un turno</option>
+                <option value="Mañana">Mañana</option>
+                <option value="Tarde">Tarde</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="alumno">Estudiante:</label>
+            <select id="alumno" onchange="updateStudentName()">
+                <option value="">Seleccione un estudiante</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" />
+        </div>
+
+        <div class="form-group">
+            <label for="titulo">PREVISIÓN (TÍTULO, PROYECTO, SECUENCIA, UNIDAD):</label>
+            <input type="text" id="titulo" placeholder="Ejemplo: Proyecto de Música" />
+        </div>
+        <div class="form-group">
+            <label for="propuesta">PROPUESTA (NRO DE PROPUESTA O BREVE RESUMEN):</label>
+            <textarea id="propuesta" placeholder="Descripción breve de la propuesta"></textarea>
+        </div>
+
+        <h2>Items</h2>
+        <div class="form-group">
+            <label>Desarrollo del canto:</label>
+            <input type="checkbox" id="canto1" />
+            <label for="canto1">Participó activamente en el canto colectivo, demostrando entusiasmo</label><br>
+            <input type="checkbox" id="canto2" />
+            <label for="canto2">Utilizó correctamente la voz, cuidando su intensidad y tono</label><br>
+            <input type="checkbox" id="canto3" />
+            <label for="canto3">Respetó el ritmo y la melodía de las canciones</label>
+        </div>
+
+        <div class="form-group">
+            <label>Exploración y producción de sonidos:</label>
+            <input type="checkbox" id="sonido1" />
+            <label for="sonido1">Experimentó con una variedad de sonidos utilizando diferentes objetos y técnicas</label><br>
+            <input type="checkbox" id="sonido2" />
+            <label for="sonido2">Creó secuencias rítmicas originales con su cuerpo</label><br>
+            <input type="checkbox" id="sonido3" />
+            <label for="sonido3">Relacionó los sonidos producidos con objetos de su entorno</label>
+        </div>
+
+        <div class="form-group">
+            <label>Reproducción y evocación de sonidos:</label>
+            <input type="checkbox" id="evocacion1" />
+            <label for="evocacion1">Imitó sonidos de animales, objetos o instrumentos con su voz</label><br>
+            <input type="checkbox" id="evocacion2" />
+            <label for="evocacion2">Reprodujo melodías simples en un instrumento</label><br>
+            <input type="checkbox" id="evocacion3" />
+            <label for="evocacion3">Creó una atmósfera sonora utilizando diferentes elementos</label>
+        </div>
+
+        <div class="form-group">
+            <label>Relación con el entorno sonoro:</label>
+            <input type="checkbox" id="entorno1" />
+            <label for="entorno1">Identificó las fuentes de sonidos en su entorno (ej: el viento, un pájaro)</label><br>
+            <input type="checkbox" id="entorno2" />
+            <label for="entorno2">Describió los sonidos que escuchaba utilizando adjetivos (ej: fuerte, suave, agudo)</label><br>
+            <input type="checkbox" id="entorno3" />
+            <label for="entorno3">Creó una composición sonora inspirada en un paisaje sonoro</label>
+        </div>
+
+        <div class="form-group">
+            <label>Participación en el quehacer musical conjunto:</label>
+            <input type="checkbox" id="conjunto1" />
+            <label for="conjunto1">Colaboró con sus compañeros en la creación de una melodía</label><br>
+            <input type="checkbox" id="conjunto2" />
+            <label for="conjunto2">Respetó los turnos de participación en las actividades musicales</label><br>
+            <input type="checkbox" id="conjunto3" />
+            <label for="conjunto3">Aportó ideas originales a las actividades grupales</label>
+        </div>
+
+        <div class="form-group">
+            <label>Reconocimiento y creación de motivos:</label>
+            <input type="checkbox" id="motivo1" />
+            <label for="motivo1">Identificó y repitió motivos rítmicos o melódicos</label><br>
+            <input type="checkbox" id="motivo2" />
+            <label for="motivo2">Creó una pequeña frase musical utilizando su voz o un instrumento</label><br>
+            <input type="checkbox" id="motivo3" />
+            <label for="motivo3">Combinó diferentes motivos para crear una composición más larga</label>
+        </div>
+
+        <div class="form-group">
+            <label>Avances en la audición:</label>
+            <input type="checkbox" id="audicion1" />
+            <label for="audicion1">Demostró interés por escuchar diferentes tipos de música</label><br>
+            <input type="checkbox" id="audicion2" />
+            <label for="audicion2">Identificó instrumentos musicales en grabaciones o en vivo</label><br>
+            <input type="checkbox" id="audicion3" />
+            <label for="audicion3">Hizo comentarios sobre las características de la música que escuchó</label>
+        </div>
+
+        <button class="btn" onclick="generateReport()">Generar Reporte</button>
+
+        <div id="report" style="margin-top: 30px;"></div>
+    </div>
+
+    <script>
+      const students = {
+            "Violeta": {
+                "Mañana": [
+                    "Mena Juan Ignacio", "Lancon Matheo Alan", "Soto Bastian Zadquiel", "Gerez Rodriguez Martina", "Fontana Ignacio Agustín",
+                    "Laz Lautaro Gabriel", "Guzman Agostina", "Sallago Leandro Kilians", "Lopez Silva Luz Andrea", "Deferrari Vittorio Tian",
+                    "Santucho Valentino", "Martinez Josias", "Ruiz Diaz Thiago Ezequiel", "Carrera Dos Santos Tiziano", "Dominguez Isabella",
+                    "Rodriguez Dante", "Corbellini Napole Liam", "Corbellini Napole Iker", "Juan Enrique Bibi", "Amarilla"
+                ],
+                "Tarde": [
+                    "Urbano Camilo", "Amarilla Valenzuela Santino Nicolás", "Baratti Roma Narella", "Celillo Noha Benjamín", "Conceicao DaRosa Cardozo",
+                    "Amaris Valquiria", "Córdoba Danna", "Curra Fabricio", "Errasti Theo Gael", "Fahuas Thiago Leon Mateo", "Gigle Milton Ian",
+                    "Gimenez Franchesca Catalina", "Lorenzo Xiara Olivia", "Mercado Bastian Santino", "Pasos Ihan Rafael", "Pozzuto Ciro",
+                    "Principe Mateo Nahuel", "Ramirez Milagros Elizabeth", "Santamaria Ramiro Ezequiel", "Saucedo Milena Aitana",
+                    "Tamagno Navarro Bastian", "Vezzosi Debian"
+                ]
+            },
+            "Naranja": {
+                "Mañana": [
+                    "Mariano Morales", "Ayala Sofía", "Castillo Valentina Jazmin", "Coronel Morinigo Rosario", "Darki Lorenzo Martín",
+                    "Falcon Benicio Nahuel", "Farinelli Santos Oriana", "Gamarra Malena Joaquina Mercedes", "Grosjean Stefano Ezequiel",
+                    "Guerrero Carlo Fernando", "Herrera Olivia Nahiara", "Huczek Mia Lujan", "Lobo Franchesca", "Massimino Ludmila Xiomara",
+                    "Montenegro Ambar Julieta", "Pozzuto Sara Eleonor", "Ruiz Diaz Eithan Asiel", "Urbanas Toledo Liam Tahiel", "Villar Juana Luciana"
+                ],
+                "Tarde": [
+                    "Acosta Noha Valentín", "Berón Santino Nicolas", "Comesaña Julián", "Connsuelo Juana Olivia", "Concettoni Noah Ezequiel",
+                    "Dejneka Thiago Benjamín", "Galvan Lautaro Ismael", "Gimenez Antonio Ismael", "Jara Lucila", "Jorge Doval Catalina",
+                    "Lopez Benicio Nehuel", "Lizarraga Olivia Josefina", "Llanos Jeremías Ezequiel", "Martinez Josias Israel", "Martinez Sarah",
+                    "Molina Dariel Jesus", "Montenegros Bastián", "Paredes Martinez Micaela", "Sanchez Esteban Germán", "Villalba Bautista Elian",
+                    "Ramoha Aaron Gabriel", "Urbano Salvador"
+                ]
+            },
+            "Verde": {
+                "Mañana": [
+                    "Amarilla Techeira Ciro Nehuen", "Aragon Niz Josefina", "Caballero Nehitan", "Carrera Dos Santos Renzo Apolo", "Cura Diaz Facundo",
+                    "De Leonardis Stavrakis Ethan", "Fernandez Maia Luana", "Gonzalez Pilar Estefania", "Klauss Ian Gael", "Lugo Ramirez Oriana Mariel",
+                    "Mamani Ceferina Pilar", "Oñate Leonardo Yonathan", "Piuselli Julian Valentin", "Puertas Lazaro", "Rodriguez Acuña Cataleya Rosario",
+                    "Serrano Amalia", "Sosa Martina Isabella", "Sotelo Isabella Alexa"
+                ],
+                "Tarde": [
+                    "Alvez Gennaro Adrian", "Amaya Joaquin Nicolas", "Avila Ambar Jazmin", "Blanco Bruno David", "Corsini Luna",
+                    "Gonzalez Ailin", "Gussoni Herrera Kaia", "Ferreyra Bryan Eithan", "Hernandez Malena Isabel", "Iberra Ezequiel Nicolas",
+                    "Martinez Elena", "Martinez Luney", "Vázquez Ramiro", "Ormeño Darlis Valentina Alejandra", "Peralta Tahiel Mateo",
+                    "Parrota Charo", "Pozzuto Ciro Alejandro", "Pueblas Grande Amelia", "Rivero Romina Milagros", "Sanchez Amy Alondra",
+                    "Sosa Eva Martina"
+                ]
+            },
+            "Turquesa": {
+                "Mañana": [
+                    "Cuello Isabella Rufina", "Corvalan Thaiel", "Farfaglia Jara Amapola Rosinna", "Ferreyra Renzo Agustín", "Garcia Tomas Nahuel",
+                    "Lambertini Bruno", "Lorbes Loan Uziel", "Maldonado Janna", "Quiroz Yuri Dilan", "Rueda Thiago", "Salgan Joaquin Andre",
+                    "Sanabria Fritz Henry Leonard", "Sandoval Elizabeth Elena", "Suarez Osorio Milagros", "Tealdi Mayra Jazmin", "Borghi Benicio Angel"
+                ],
+                "Tarde": [
+                    "Asturillo Ruiz Urzula Erika", "Aguirre Capel Alma Franca", "Baratti Zoe Aimara", "Buenrostro Erick Emmanuel", "Cesar Ambar Geraldine",
+                    "Cisneros Bella", "Cuevas Ortiz Clara", "Echeverria Gemma", "Ferreyra Ambar Antonela", "Gimenez Julieta Aymara", "Marquez Bastian Guillermo",
+                    "Monforte Chiarullo Lucio", "Montes de Oca Eylul Franchesca", "Nigro Abril Isabella", "Nucera Amara", "Montenegro Carlos Catriel",
+                    "Ormeño Jazmin Aylén", "Parodi Catia Isabella", "Quiroga Iris Alma Abril", "Ruiz Diaz Emilia Gianella", "Sanchez Sara Abigail",
+                    "Sotelo Santino Daniel", "Kylian Taylor", "Chamorro Nievas Martina", "Ferreyra Gomez Ariel Agustin"
+                ]
+            }
+        };
+
+
+        function updateStudents() {
+            const color = document.getElementById("color").value;
+            const turno = document.getElementById("turno").value;
+            const studentSelect = document.getElementById("alumno");
+
+            studentSelect.innerHTML = '<option value="">Seleccione un estudiante</option>'; // Clear previous options
+
+            if (color && turno && students[color] && students[color][turno]) {
+                students[color][turno].forEach(student => {
+                    const option = document.createElement("option");
+                    option.value = student;
+                    option.textContent = student;
+                    studentSelect.appendChild(option);
+                });
+            }
+        }
+
+        function updateStudentName() {
+            const studentName = document.getElementById("alumno").value;
+            document.getElementById("studentName").value = studentName;
+        }
+
+        function generateReport() {
+            const titulo = document.getElementById("titulo").value;
+            const propuesta = document.getElementById("propuesta").value;
+            const estudiante = document.getElementById("alumno").value;
+            const fecha = document.getElementById("fecha").value;
+            const color = document.getElementById("color").value;
+            const turno = document.getElementById("turno").value;
+
+            let reportContent = `Reporte de Estudiante\n\n`;
+            reportContent += `Nombre del Estudiante: ${estudiante}\n`;
+            reportContent += `Sala: ${color}\n`;
+            reportContent += `Turno: ${turno}\n`;
+            reportContent += `Fecha: ${fecha}\n`;
+            reportContent += `Título: ${titulo}\n`;
+            reportContent += `Propuesta: ${propuesta}\n\n`;
+
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            let itemsContent = 'Items Evaluados:\n';
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    itemsContent += `- ${checkbox.nextElementSibling.textContent}\n`;
+                }
+            });
+            reportContent += itemsContent;
+
+            // Show report in the div
+            document.getElementById("report").innerText = reportContent;
+
+            // Create a file name with the student's name, room, shift, and date
+            const fileName = `${estudiante}_${color}_${turno}_${fecha}.txt`.replace(/\//g, '-');
+
+            // Save report as a .txt file
+            const blob = new Blob([reportContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

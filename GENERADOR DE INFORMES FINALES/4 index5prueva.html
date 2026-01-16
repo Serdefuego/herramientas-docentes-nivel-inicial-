@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Informes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        h1, h3 {
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        label, textarea, input, select {
+            display: block;
+            margin: 10px 0;
+            width: 100%;
+        }
+        textarea {
+            height: 100px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generador de Informes</h1>
+    <div class="container">
+        <label for="sala">Sala:</label>
+        <input type="text" id="sala" placeholder="Ej. Sala Violeta">
+
+        <label for="turno">Turno:</label>
+        <select id="turno">
+            <option value="Mañana">Mañana</option>
+            <option value="Tarde">Tarde</option>
+        </select>
+
+        <label for="nombres">Lista de estudiantes (uno por línea):</label>
+        <textarea id="nombres" placeholder="Ej. Juan Pérez&#10;María López"></textarea>
+
+        <button id="generar">Generar Informes</button>
+    </div>
+
+    <script>
+        const observations = [
+            "Ha aprendido a coordinar los movimientos del cuerpo al ritmo de las canciones, integrando diferentes patrones de movimiento.",
+            "Ha desarrollado la capacidad de identificar timbres instrumentales diferenciados, como los de percusión y cuerda.",
+            "Ha integrado su voz al canto grupal, logrando cantar al compás y con entonación adecuada.",
+            "Ha logrado identificar y reconocer sonidos de animales e instrumentos en grabaciones, mostrando gran atención.",
+            "Ha avanzado en la práctica de ritmos básicos utilizando cotidiafonos y otros instrumentos.",
+            "Ha comenzado a discriminar sonidos graves y agudos, asociándolos con objetos o imágenes específicos.",
+            "Ha aprendido a representar sonidos a través de dibujos rítmicos, relacionando patrones sonoros con trazos visuales.",
+            "Ha logrado identificar y reproducir patrones rítmicos sencillos utilizando instrumentos de percusión.",
+            "Ha aprendido a expresar emociones a través del movimiento corporal, sincronizando sus gestos con la música.",
+            "Ha desarrollado interés por los juegos de canto y ritmo, logrando avances en la coordinación vocal y corporal.",
+            "Ha aprendido a coordinar los movimientos del cuerpo al ritmo de las canciones, integrando diferentes patrones de movimiento.",
+            "Ha desarrollado la capacidad de identificar timbres instrumentales diferenciados, como los de percusión y cuerda.",
+            "Ha integrado su voz al canto grupal, logrando cantar al compás y con entonación adecuada.",
+            "Ha logrado identificar y reconocer sonidos de animales e instrumentos en grabaciones, mostrando gran atención.",
+            "Ha avanzado en la práctica de ritmos básicos utilizando cotidiafonos y otros instrumentos.",
+            "Ha comenzado a discriminar sonidos graves y agudos, asociándolos con objetos o imágenes específicos.",
+            "Ha aprendido a representar sonidos a través de dibujos rítmicos, relacionando patrones sonoros con trazos visuales.",
+            "Ha logrado identificar y reproducir patrones rítmicos sencillos utilizando instrumentos de percusión.",
+            "Ha aprendido a expresar emociones a través del movimiento corporal, sincronizando sus gestos con la música.","Ha aprendido a coordinar los movimientos del cuerpo al ritmo de las canciones, integrando diferentes patrones de movimiento.",
+            "Ha desarrollado la capacidad de identificar timbres instrumentales diferenciados, como los de percusión y cuerda.",
+            "Ha integrado su voz al canto grupal, logrando cantar al compás y con entonación adecuada.",
+            "Ha logrado identificar y reconocer sonidos de animales e instrumentos en grabaciones, mostrando gran atención.",
+            "Ha avanzado en la práctica de ritmos básicos utilizando cotidiafonos y otros instrumentos.",
+            "Ha comenzado a discriminar sonidos graves y agudos, asociándolos con objetos o imágenes específicos.",
+            "Ha aprendido a representar sonidos a través de dibujos rítmicos, relacionando patrones sonoros con trazos visuales.",
+            "Ha logrado identificar y reproducir patrones rítmicos sencillos utilizando instrumentos de percusión.",
+            "Ha aprendido a expresar emociones a través del movimiento corporal, sincronizando sus gestos con la música."
+        ];
+
+        document.getElementById("generar").addEventListener("click", () => {
+            const sala = document.getElementById("sala").value.trim();
+            const turno = document.getElementById("turno").value;
+            const nombresInput = document.getElementById("nombres").value.trim();
+
+            if (!sala || !nombresInput) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            // Divide los nombres por líneas
+            const nombres = nombresInput.split("\n").map(nombre => nombre.trim()).filter(nombre => nombre);
+            const shuffledObservations = [...observations].sort(() => 0.5 - Math.random());
+            
+            nombres.forEach((nombre, index) => {
+                const observation = shuffledObservations[index % observations.length];
+                const reportContent = `
+Jardín de Infantes 901 Constancio C. Vigil
+Estudiante: ${nombre}
+Profesor de Música: Marcos Nahuel Lagña
+Periodo: AGOSTO-DICIEMBRE
+Sala: ${sala}
+Turno: ${turno}
+
+Durante el período mencionado, hemos llevado a cabo una variedad de actividades en las clases de música de nivel inicial, enfocadas en brindar una experiencia educativa integral y divertida. A continuación, detallamos las actividades realizadas:
+1. Práctica de Ritmos con Instrumentos Cotidiafonos.
+2. Fabricación de Instrumentos Cotidiafonos.
+3. Escucha de Sonidos Grabados de Animales.
+4. Improvisación de Canciones.
+5. Canto con Acompañamiento de Instrumentos Musicales.
+6. Escucha de Canciones del Repertorio Clásico.
+7. Exploración Sonora y Corporal.
+8. Creación de Dibujos Rítmicos.
+9. Aprendizaje sobre Grafías Analógicas.
+10. Exploración de Sonidos del Ambiente Natural y Social.
+11. Escucha de Poesías, Adivinanzas y Cuentos Cantados.
+12. Talleres Familiares para la Construcción de Instrumentos.
+13. Conocimiento de Instrumentos Musicales Profesionales.
+
+OBSERVACIONES: ${observation}
+                `.trim();
+
+                const filename = `Informe_${sala}_${turno}_${nombre.replace(/\s+/g, '_')}.txt`;
+                saveToFile(reportContent, filename);
+            });
+
+            alert("Informes generados y guardados con éxito.");
+        });
+
+        function saveToFile(content, filename) {
+            const blob = new Blob([content], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

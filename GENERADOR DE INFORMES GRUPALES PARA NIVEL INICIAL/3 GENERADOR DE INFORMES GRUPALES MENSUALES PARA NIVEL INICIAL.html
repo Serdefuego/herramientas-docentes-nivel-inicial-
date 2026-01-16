@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Informes de Clases de Música</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    .circle {
+        width: 15vw; /* Ancho del círculo en relación con el ancho de la ventana */
+        height: 15vw; /* Altura del círculo en relación con el ancho de la ventana */
+        max-width: 150px; /* Máximo ancho del círculo */
+        max-height: 150px; /* Máxima altura del círculo */
+        border-radius: 50%;
+        position: fixed;
+        bottom: 5%; /* Ajuste de la posición vertical */
+        right: 5%; /* Ajuste de la posición horizontal */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 5vw; /* Tamaño del emoji en relación con el ancho de la ventana */
+        background-color: #007bff; /* Color de fondo del círculo */
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Informes de clases</h1>
+        <label for="periodo">Periodo:</label>
+        <input type="text" id="periodo" value="1 de Marzo - 30 de Abril">
+
+        <label for="institucion">Institución:</label>
+        <input type="text" id="institucion" placeholder="Ingrese el nombre de la institución">
+
+        <label for="alumnos">Estudiantes (separados por comas):</label>
+        <textarea id="alumnos" rows="4">FULANO, MENGANO, FULANITO</textarea>
+
+        <label for="sala">Sala:</label>
+        <select id="sala" onchange="cambiarColorFondo()">
+            <option value="Verde">Verde</option>
+            <option value="Amarilla">Amarilla</option>
+            <option value="Violeta">Violeta</option>
+            <option value="Turquesa">Turquesa</option>
+            <option value="Naranja">Naranja</option>
+            <option value="Ceibos">Ceibos</option>
+            <option value="Magnolias">Magnolias</option>
+            <option value="Jacaranda">Jacaranda</option>
+            <option value="Cactus">Cactus</option>
+        </select>
+
+        <label for="nombre_sala">Nombre de Sala Personalizado:</label>
+        <input type="text" id="nombre_sala" placeholder="Ingrese el nombre de la sala">
+
+        <label for="turno">Turno:</label>
+        <select id="turno" onchange="cambiarColorCirculo()">
+            <option value="Mañana">Mañana</option>
+            <option value="Tarde">Tarde</option>
+        </select>
+
+        <label for="profesor">Profesor:</label>
+        <input type="text" id="profesor" value="Marcos Nahuel Lagña">
+
+        <label for="extra">Estimada familia:</label>
+        <textarea id="extra" rows="4">Estimada familia:</textarea>
+
+        <label for="texto_informe">Texto del Informe:</label>
+        <textarea id="texto_informe" rows="10">
+Informe de Actividades de las Clases de Música - Nivel Inicial
+[JARDIN_INSTITUCION]
+Estudiante: [NOMBRE_ALUMNO]
+Profesor de Música: [NOMBRE_PROFESOR]
+Periodo: [PERIODO]
+Sala: [NOMBRE_SALA]
+Turno: [TURNO]
+Durante el período mencionado, hemos llevado a cabo una variedad de actividades en las clases de música de nivel inicial, enfocadas en brindar una experiencia educativa integral y divertida. A continuación, detallamos las actividades realizadas:
+1. Práctica de Ritmos con Instrumentos Cotidiáfonos: Los estudiantes participaron activamente en la práctica de ritmos utilizando instrumentos cotidianos, explorando sonidos y ritmos creativos.
+2. Fabricación de Instrumentos Cotidiáfonos: Como parte de nuestra creatividad y exploración sonora, los estudiantes fabricaron sus propios instrumentos cotidiáfonos, lo que fomentó su imaginación y destrezas manuales.
+3. Escucha de Sonidos Grabados de Animales: A través de la audición de sonidos grabados de animales, los estudiantes desarrollaron su capacidad auditiva y su aprecio por la diversidad sonora.
+4. Improvisación de Canciones: Se alentó a los estudiantes a improvisar canciones, fomentando su creatividad y confianza en sí mismos como músicos.
+5. Canto con Acompañamiento de Instrumentos Musicales: Los estudiantes participaron en actividades de canto acompañados de instrumentos musicales, lo que les permitió experimentar la sensación de interpretar música en grupo.
+6. Escucha de Canciones del Repertorio Clásico: Se presentaron a los estudiantes canciones del repertorio clásico, ampliando así su conocimiento musical y su apreciación por la música de diferentes épocas.
+7. Exploración Sonora y Corporal: Mediante juegos y actividades, los estudiantes exploraron el sonido de diferentes instrumentos, así como también trabajaron en movimientos corporales rítmicos.
+8. Creación de Dibujos Rítmicos: Se animó a los estudiantes a expresar ritmos a través del arte, creando dibujos rítmicos que reflejaran la música que escuchaban.
+9. Aprendizaje sobre Grafías Analógicas: Se introdujo a los estudiantes en conceptos básicos de notación musical, explorando las grafías analógicas de manera lúdica y creativa.
+10. Exploración de Sonidos del Ambiente Natural y Social: A través de actividades de escucha atenta sobre grabaciones de sonidos en el aula y los estudiantes exploraron los sonidos del ambiente natural y social que los rodea.
+11. Escucha de Poesías, Adivinanzas y Cuentos Cantados: Se incorporaron elementos literarios a las clases de música, enriqueciendo así la experiencia auditiva de los estudiantes.
+12. Talleres Familiares para la Construcción de Instrumentos: Se organizaron talleres familiares donde los estudiantes y sus familias participaron en la construcción de instrumentos musicales, fortaleciendo los lazos familiares y promoviendo la creatividad en casa.
+13. Conocimiento de Instrumentos Musicales Profesionales: Los estudiantes tuvieron la oportunidad de conocer instrumentos musicales profesionales, interpretados por el profesor, lo que amplió su comprensión y aprecio por la música.
+Estas actividades han contribuido al desarrollo integral de los estudiantes, estimulando su creatividad, habilidades musicales y aprecio por la música en todas sus formas. Esperamos continuar explorando y creciendo juntos en futuras clases de música.
+        </textarea>
+
+        <label for="nombre_alumno_mod">Nombre del Alumno a Modificar:</label>
+        <input type="text" id="nombre_alumno_mod" placeholder="Ingrese el nombre del alumno a modificar">
+
+        <label for="modificacion">Modificación:</label>
+        <textarea id="modificacion" rows="4"></textarea>
+
+        <button onclick="generarInformeTexto()">Generar Informes en Texto</button>
+    </div>
+
+    <div class="circle" id="circle">☀️</div>
+
+    <script>
+        function cambiarColorFondo() {
+            const salaInput = document.getElementById('sala').value;
+            const colores = {
+                Verde: '#008000',
+                Amarilla: '#FFFF00',
+                Violeta: '#8A2BE2',
+                Turquesa: '#40E0D0',
+                Naranja: '#FFA500',
+                Ceibos: '#8DB600',
+                Magnolias: '#FFD700',
+                Jacaranda: '#6A5ACD',
+                Cactus: '#008080'
+            };
+            document.body.style.backgroundColor = colores[salaInput];
+        }
+
+        function cambiarColorCirculo() {
+            const turnoInput = document.getElementById('turno').value;
+            const circle = document.getElementById('circle');
+
+            if (turnoInput === 'Mañana') {
+                circle.style.backgroundColor = 'yellow';
+                circle.innerText = '☀️';
+            } else if (turnoInput === 'Tarde') {
+                circle.style.backgroundColor = 'black';
+                circle.innerText = '🌙';
+            } else {
+                circle.style.backgroundColor = 'transparent';
+                circle.innerText = '';
+            }
+        }
+
+        function generarInformeTexto() {
+            const alumnosInput = document.getElementById('alumnos');
+            const salaInput = document.getElementById('sala');
+            const nombreSalaInput = document.getElementById('nombre_sala');
+            const turnoSelect = document.getElementById('turno');
+            const periodoInput = document.getElementById('periodo');
+            const institucionInput = document.getElementById('institucion');
+            const profesorInput = document.getElementById('profesor');
+            const extraInput = document.getElementById('extra');
+            const textoInformeInput = document.getElementById('texto_informe');
+            const nombreAlumnoModInput = document.getElementById('nombre_alumno_mod');
+            const modificacionInput = document.getElementById('modificacion');
+            const alumnos = alumnosInput.value.split(',').map(alumno => alumno.trim());
+
+            let informeCompleto = '';
+
+            alumnos.forEach((alumno, index) => {
+                let informe = textoInformeInput.value + '\n';
+                informe = informe.replace(/\[NOMBRE_ALUMNO\]/g, alumno);
+                informe = informe.replace(/\[NOMBRE_SALA\]/g, nombreSalaInput.value || salaInput.value);
+                informe = informe.replace(/\[TURNO\]/g, turnoSelect.value);
+                informe = informe.replace(/\[PERIODO\]/g, periodoInput.value);
+                informe = informe.replace(/\[JARDIN_INSTITUCION\]/g, institucionInput.value);
+                informe = informe.replace(/\[NOMBRE_PROFESOR\]/g, profesorInput.value);
+                
+                // Agregar modificación si el alumno coincide con el nombre proporcionado
+                if (alumno === nombreAlumnoModInput.value.trim()) {
+                    informe += '\n\n' + modificacionInput.value;
+                }
+                
+                informeCompleto += informe;
+                
+                // Agregar espacio entre informes
+                if (index !== alumnos.length - 1) {
+                    informeCompleto += '\n\n';
+                }
+            });
+
+            // Agregar parte extra del informe al final
+            informeCompleto += '\n\n' + extraInput.value;
+
+            const fileName = `Informe_Actividades_Musica_${nombreSalaInput.value || salaInput.value}_${institucionInput.value}_${periodoInput.value}_${turnoSelect.value}.txt`;
+            const blob = new Blob([informeCompleto], { type: 'text/plain;charset=utf-8' });
+            saveAs(blob, fileName);
+        }
+
+        // Llamar a las funciones para inicializar el color de fondo y el círculo
+        cambiarColorFondo();
+        cambiarColorCirculo();
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Informe individual de Música</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generador de Informes de Música</h1>
+    
+    <label for="studentNames">Introduce los nombres de los estudiantes (uno por línea):</label>
+    <textarea id="studentNames"></textarea>
+
+    <label for="sala">Nombre de la Sala:</label>
+    <input type="text" id="sala" placeholder="Ej. Sala Violeta">
+    
+    <label for="turno">Turno:</label>
+    <input type="text" id="turno" placeholder="Ej. Turno Mañana">
+
+    <button id="generateReports" onclick="generateReports()">Generar Informes</button>
+    
+    <div class="output" id="output"></div>
+    
+    <script>
+        // Lista de observaciones personalizadas para cada estudiante
+        const observations = [
+            "Ha aprendido a coordinar los movimientos del cuerpo al ritmo de las canciones, integrando diferentes patrones de movimiento. Este aprendizaje se logró mediante actividades de expresión corporal que combinaban baile y dramatización de letras. Participó con entusiasmo y mostró creatividad en cada propuesta, adaptando sus movimientos al compás de la música.",
+            "Ha desarrollado la capacidad de identificar timbres instrumentales diferenciados, como los de percusión y cuerda. Este aprendizaje se dio durante las sesiones de exploración sonora, donde experimentó con diferentes instrumentos. Su curiosidad y atención lo llevaron a reconocer y describir las características de cada timbre de manera clara.",
+            "Ha integrado su voz al canto grupal, logrando cantar al compás y con entonación adecuada. Este progreso fue posible gracias a ejercicios previos de vocalización y prácticas guiadas, donde mostró un compromiso constante. Su avance se refleja en su capacidad de ajustarse al ritmo y aportar al conjunto con confianza.",
+            "Ha logrado identificar y reconocer sonidos de animales e instrumentos en grabaciones, mostrando gran atención. Este contenido fue adquirido mediante juegos de audiopercepción y escucha activa. Su participación activa y su interés por relacionar los sonidos con imágenes le permitieron consolidar este aprendizaje.",
+            "Ha comenzado a discriminar sonidos graves y agudos, asociándolos con objetos o imágenes específicos. Este contenido se trabajó en actividades lúdicas, como el bingo sonoro y dinámicas de imitación. Su progreso se evidencia en su habilidad para identificar diferencias tonales con precisión.",
+            "Ha aprendido a representar sonidos a través de dibujos rítmicos, relacionando patrones sonoros con trazos visuales. Este aprendizaje se desarrolló mediante actividades prácticas de asociación, en las que participó con entusiasmo. Su creatividad y precisión en los dibujos reflejan un entendimiento claro de los conceptos trabajados.",
+            "Ha aprendido a expresar emociones a través del movimiento corporal, sincronizando sus gestos con la música. Este contenido se adquirió mediante actividades de expresión creativa y juegos de dramatización. Su participación activa y su capacidad de interpretación enriquecieron las dinámicas grupales.",
+            "Ha integrado de manera progresiva su voz en el canto grupal, mejorando su afinación y ritmo. Este aprendizaje se dio mediante ejercicios de vocalización y prácticas en grupo. Su esfuerzo y constancia han permitido un avance significativo en su desempeño vocal.",
+            "Ha aprendido a seguir instrucciones musicales de manera precisa durante las actividades grupales. Este contenido se trabajó mediante dinámicas de coordinación, mostrando atención y esfuerzo en cada propuesta. Su capacidad para responder con rapidez y precisión ha mejorado notablemente.",
+            "Ha logrado asociar sonidos con imágenes en actividades de discriminación auditiva, como el bingo sonoro. Este aprendizaje se desarrolló mediante prácticas de escucha activa y juegos interactivos. Su participación fue destacada, mostrando interés y precisión en cada actividad.",
+            "Ha comenzado a reconocer y reproducir patrones melódicos sencillos mediante juegos vocales. Este aprendizaje se logró a través de dinámicas de repetición y práctica guiada, en las que mostró progresos constantes. Su habilidad para recordar y reproducir las melodías es destacable.",
+            "Ha aprendido a trabajar en equipo, colaborando en la creación de ritmos grupales con sus compañeros. Este aprendizaje se dio mediante actividades cooperativas, donde mostró respeto y disposición para aportar. Su contribución creativa fue clave para el éxito de las dinámicas",
+            "Ha avanzado en la escucha atenta, logrando identificar elementos específicos en grabaciones de sonidos de animales e instrumentos. Este aprendizaje se consolidó mediante prácticas guiadas de discriminación auditiva. Su compromiso y concentración son evidentes en su desempeño.",
+            "Ha aprendido a coordinar su participación en juegos musicales, respetando turnos y siguiendo ritmos grupales. Este aprendizaje se logró mediante actividades lúdicas, que fomentaron la atención y la respuesta oportuna. Su capacidad de integración y cooperación ha mejorado notablemente.",
+            "Ha comenzado a identificar las dinámicas de volumen (fuerte y suave) en las canciones trabajadas. Este aprendizaje se adquirió mediante ejercicios auditivos guiados y juegos sonoros. Su capacidad para distinguir y aplicar estas dinámicas ha mejorado.",
+            "Ha avanzado en la coordinación entre voz y cuerpo al integrar movimientos rítmicos en el canto grupal. Este aprendizaje se consolidó mediante prácticas guiadas y juegos. Su progreso es evidente en su desempeño dinámico.",
+            "Ha desarrollado la habilidad de identificar timbres instrumentales diferenciados, como los de cuerda y percusión. Este aprendizaje fue adquirido durante sesiones de exploración sonora, en las que mostró gran curiosidad y atención. Su capacidad para describir las características de cada instrumento fue destacable.",
+            "Ha aprendido a coordinar los movimientos del cuerpo al ritmo de las canciones, integrando diferentes patrones de movimiento. Este aprendizaje se logró mediante actividades de expresión corporal que combinaban baile y dramatización de letras. Participó con entusiasmo y mostró creatividad en cada propuesta, adaptando sus movimientos al compás de la música. Su progreso es evidente en su capacidad para interpretar canciones con fluidez y confianza, reflejando un entendimiento más profundo del ritmo y la coordinación.",
+            "Ha desarrollado la capacidad de identificar timbres instrumentales diferenciados, como los de percusión y cuerda. Este aprendizaje se dio durante sesiones de exploración sonora, experimentando con diversos instrumentos musicales. Su curiosidad y atención le permitieron reconocer y describir las características de cada timbre con precisión. Además, mostró interés por relacionar estos sonidos con ejemplos prácticos y situaciones cotidianas, consolidando su aprendizaje de manera integral.",
+            "Ha integrado su voz al canto grupal, logrando cantar al compás y con entonación adecuada. Este progreso fue posible gracias a ejercicios de vocalización previos y prácticas guiadas en grupo. Mostró un compromiso constante y mejoró notablemente su afinación y capacidad para ajustarse al ritmo musical. Su participación ha enriquecido la dinámica del grupo, aportando seguridad y entusiasmo en cada interpretación.",
+            "Ha logrado identificar y reconocer sonidos de animales e instrumentos en grabaciones, mostrando gran atención y precisión. Este aprendizaje se trabajó mediante juegos de audiopercepción y escucha activa, fomentando su interés y curiosidad. Relacionó los sonidos con imágenes de manera creativa, consolidando su habilidad para discriminar elementos auditivos con confianza. Su participación activa fue clave para el éxito de estas actividades.",
+            "Ha avanzado en la práctica de ritmos básicos utilizando cotidiafonos y otros instrumentos de percusión. Este aprendizaje se desarrolló en actividades grupales, donde mostró constancia, creatividad y habilidad para reproducir patrones rítmicos. Su capacidad para coordinarse con sus compañeros y mantener el ritmo se ha destacado, fortaleciendo su confianza en las sesiones. Esto refleja su entusiasmo por explorar nuevas posibilidades rítmicas.",
+            "Ha comenzado a discriminar sonidos graves y agudos, asociándolos con objetos o imágenes específicos. Este contenido se trabajó mediante actividades lúdicas como el bingo sonoro y dinámicas de imitación. Mostró progresos significativos al identificar diferencias tonales con precisión, utilizando ejemplos concretos durante las sesiones. Su participación activa y curiosidad han enriquecido su comprensión de las propiedades del sonido.",
+        ];
+
+        function generateReports() {
+            const studentNames = document.getElementById('studentNames').value.trim().split('\n');
+            const sala = document.getElementById('sala').value.trim();
+            const turno = document.getElementById('turno').value.trim();
+            const output = document.getElementById('output');
+            
+            output.innerHTML = ''; // Limpiar el área de salida
+            
+            if (studentNames.length === 0 || !sala || !turno) {
+                output.textContent = 'Por favor, asegúrate de llenar todos los campos.';
+                return;
+            }
+
+            // Crear un informe para cada estudiante con una observación personalizada
+            studentNames.forEach((name, index) => {
+                const observation = observations[index % observations.length]; // Asigna una observación diferente para cada estudiante
+
+                const reportContent = `
+Jardín de Infantes 901 Constancio C. Vigil
+Estudiante: ${name}
+Profesor de Música: Marcos Nahuel Lagña
+Periodo: AGOSTO-DICIEMBRE
+Sala: ${sala} / Turno: ${turno}
+Durante el período mencionado, hemos llevado a cabo una variedad de actividades en las clases de música de nivel inicial, enfocadas en brindar una experiencia educativa integral y divertida. A continuación, detallamos las actividades realizadas:
+1. Práctica de Ritmos con Instrumentos Cotidiafonos: participaron activamente en la práctica de ritmos utilizando instrumentos cotidianos, explorando sonidos y ritmos creativos.
+2. Fabricación de Instrumentos Cotidiafonos: Como parte de nuestra creatividad y exploración sonora, los estudiantes fabricaron sus propios instrumentos cotidiafonos en clase, lo que fomentó su imaginación y destrezas manuales.
+3. Escucha de Sonidos Grabados de Animales: A través de la audición de sonidos grabados de animales, los estudiantes desarrollaron su capacidad auditiva, su aprecio por la diversidad sonora y la audioperseptiva.
+4. Improvisación de Canciones: Se alentó a improvisar canciones y brindar aportes musicales, fomentando su creatividad y confianza en sí mismos como músicos.
+5. Canto con Acompañamiento de Instrumentos Musicales: participaron en propuestas de canto acompañados de instrumentos musicales, lo que les permitió experimentar la sensación de interpretar música en grupo y de forma individual.
+6. Escucha de Canciones del Repertorio Clásico: Se presentaron canciones del repertorio clásico, ampliando así su conocimiento musical y su apreciación por la música de diferentes épocas.
+7. Exploración Sonora y Corporal: Mediante juegos y propuestas musicales, exploraron el sonido de diferentes instrumentos, así como también trabajaron en movimientos corporales rítmicos.
+8. Creación de Dibujos Rítmicos: Se animó a los estudiantes a expresar ritmos a través del arte, creando dibujos rítmicos que reflejaran la música que escuchaban y los instrumentos que se presentaron en las clases.
+9. Aprendizaje sobre Grafías Analógicas: Se introdujo a los estudiantes en conceptos básicos de notación musical, explorando las grafías analógicas de manera lúdica y creativa.
+10. Exploración de Sonidos del Ambiente Natural y Social: A través de actividades de escucha atenta sobre grabaciones de sonidos en el aula y los estudiantes exploraron los sonidos del ambiente natural y social que los rodea.
+11. Escucha de Poesías, Adivinanzas y Cuentos Cantados: Se incorporaron elementos literarios a las clases de música, enriqueciendo así la experiencia auditiva de los estudiantes y el conocimiento de distintos géneros literarios.
+12. Talleres Familiares para la Construcción de Instrumentos: Se brindaron talleres familiares donde los estudiantes y sus familias participaron en la construcción de instrumentos musicales, fortaleciendo los lazos familiares y promoviendo la creatividad, la Música y el trabajo en familia.
+13. Conocimiento de Instrumentos Musicales Profesionales: Durante las clases tuvieron la oportunidad de conocer instrumentos musicales profesionales, interpretados por el profesor, lo que amplió su comprensión y aprecio por la música, diferentes timbres y modos de acción.
+Todas estas propuestas han contribuido al desarrollo integral de los y las estudiantes, estimulando su creatividad, habilidades musicales y aprecio por la música en todas sus formas. Esperamos continuar explorando y creciendo juntos en futuras clases de música.
+
+OBSERVACIONES:
+${observation}
+----------------------------------------------------------
+                `;
+                
+                const filename = `Informe_${name.trim().replace(/\s+/g, '_')}.txt`;
+                
+                // Guardar archivo de texto en el sistema local
+                const blob = new Blob([reportContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                
+                const downloadLink = document.createElement('a');
+                downloadLink.href = url;
+                downloadLink.download = filename;
+                downloadLink.textContent = 'Descargar informe para ' + name;
+                
+                output.appendChild(downloadLink);
+                output.appendChild(document.createElement('br'));
+            });
+        }
+    </script>
+</body>
+</html>

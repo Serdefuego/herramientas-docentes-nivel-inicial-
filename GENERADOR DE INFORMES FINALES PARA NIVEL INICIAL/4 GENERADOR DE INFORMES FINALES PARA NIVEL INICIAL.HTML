@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Informes Individuales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        textarea, input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generador de Informes Individuales</h1>
+    
+    <label for="studentNames">Nombres de los estudiantes (uno por línea):</label>
+    <textarea id="studentNames" rows="10" placeholder="Introduce los nombres de los estudiantes..."></textarea>
+
+    <label for="sala">Nombre de la Sala:</label>
+    <input type="text" id="sala" placeholder="Ej. Sala Naranja">
+
+    <label for="turno">Turno:</label>
+    <select id="turno">
+        <option value="">Selecciona el turno</option>
+        <option value="Mañana">Mañana</option>
+        <option value="Tarde">Tarde</option>
+    </select>
+
+    <button id="generateReports" onclick="generateReports()">Generar Informes</button>
+    
+    <div class="output" id="output"></div>
+    
+    <script>
+        const activities = [
+            {
+                name: "Escucha de Sonidos Grabados de Animales",
+                comment: "demostró un notable interés y habilidad para identificar los sonidos grabados de los animales. mostró atencion durante la actividad y participó activamente en las conversaciones sobre las características de los sonidos de los animales que se escucharon."
+            },
+            {
+                name: "Práctica de Ritmos con Instrumentos Cotidiafonos",
+                comment: "Mostró mucha creatividad en la exploracion timbrica de  instrumentos cotidiafonos. Experimentó con diversos objetos y modos de accion para crear ritmos y sonidos, contribuyendo positivamente al trabajo en grupo con ideas  originales para la ejecucion e improvizacion musical."
+            },
+            {
+                name: "Improvisación de Canciones",
+                comment: "participó de manera activa y creativa en las improvisaciones de canciones. Mostró una gran fluidez al inventar letras con ayuda de sus compañeros y el aporte del docente, lo que motivó a sus compañeros a sumarse a la propuesta realizando aportes y creando canciones."
+            },
+            {
+                name: "Exploración Sonora y Corporal",
+                comment: "mostró una gran habilidad para integrar los movimientos corporales con la música. Sus movimientos fueron precisos y armoniosos con respeto a la musica, enriqueciendo la experiencia musical grupal."
+            },
+            {
+                name: "Canto con Acompañamiento de Instrumentos Musicales",
+                comment: "participó con entusiasmo en las actividades de canto, integrándose bien al grupo. Su voz se unió armónicamente con los instrumentos musicales, colaborando positivamente en la creación de un ambiente musical armonioso."
+            },
+            {
+                name: "Creación de Dibujos Rítmicos",
+                comment: "realizó dibujos rítmicos de manera precisa, capturando los patrones rítmicos trabajados en clase. Su habilidad para vincular música y arte visual fue muy destacada."
+            },
+            {
+                name: "Escucha de Canciones del Repertorio Clásico",
+                comment: "demostró gran interés por conocer obras clásicas. Mantuvo la atencion  durante la propuesta y participó en las reflexiones grupales sobre los sentimientos que estas obras evocan."
+            },
+            {
+                name: "Exploración de Sonidos del Ambiente Natural y Social",
+                comment: "identificó con entusiasmo diversos sonidos del entorno, relacionándolos con situaciones cotidianas. Participó activamente al compartir sus observaciones."
+            },
+            {
+                name: "Escucha de Poesías, Adivinanzas y Cuentos Cantados",
+                comment: "mostró un interés notable al escuchar poesías y cuentos musicalizados. Su atención y capacidad para conectar la música con el contenido literario fueron muy buenas."
+            },
+            {
+                name: "Talleres Familiares para la Construcción de Instrumentos",
+                comment: "participó con creatividad y entusiasmo en la construcción de instrumentos junto a su familia, mostrando una conexión especial con la música y el trabajo colaborativo."
+            },
+            {
+                name: "Conocimiento de Instrumentos Musicales Profesionales",
+                comment: "demostró curiosidad y entusiasmo al explorar los instrumentos musicales profesionales presentados en clase. Sus preguntas y comentarios reflejaron un interés genuino por ampliar su conocimiento musical."
+            },
+            {
+                name: "Fabricación de Instrumentos Cotidiafonos",
+                comment: "participó activamente en la construcción de instrumentos hechos con materiales cotidianos, demostrando gran creatividad y habilidades manuales."
+            },
+            {
+                name: "Exploración de Grafías Analógicas",
+                comment: "se destacó al interpretar y crear grafías analógicas, demostrando  entendimiento de cómo representar sonidos de manera visual, con ayuda del docente."
+            },
+            {
+                name: "Improvisación y Expresión Artística",
+                comment: "se destacó por su espontaneidad al improvisar sonidos y movimientos en actividades grupales. Su participación motivó a sus compañeros a explorar nuevas ideas."
+            },
+            {
+                name: "Interpretación de Ritmos Complejos",
+                comment: "mantuvo un excelente desempeño al ejecutar ritmos más avanzados, mostrando habilidades rítmicas bien desarrolladas y atención a los detalles."
+            },
+            {
+                name: "Apreciación de Música de Distintas Culturas",
+                comment: "mostró interés por explorar y comprender música de diferentes culturas musicales , presentadas por el docente y sus grabaciones, enriqueciendo su perspectiva artística."
+            }
+        ];
+    
+        function generateReports() {
+            const studentNames = document.getElementById('studentNames').value.trim().split('\n').filter(name => name.trim() !== "");
+            const sala = document.getElementById('sala').value.trim();
+            const turno = document.getElementById('turno').value.trim();
+            const output = document.getElementById('output');
+            
+            output.innerHTML = ''; // Limpiar la salida anterior
+            
+            if (studentNames.length === 0 || !sala || !turno) {
+                output.innerHTML = '<p style="color: red;">Por favor, completa todos los campos para generar los informes.</p>';
+                return;
+            }
+    
+            let allReports = '';
+    
+            studentNames.forEach(name => {
+                let report = `
+    Informe de Logros Individuales
+    Jardín de Infantes: 901 Constancio C. Vigil
+    Estudiante: ${name}
+    Profesor de Música: Marcos Nahuel Lagña
+    Período: Agosto-Diciembre
+    Sala: ${sala}
+    Turno: ${turno}
+    
+    Desempeño en las Propuestas Musicales:
+    `;
+                // Seleccionar 6 actividades al azar
+                const selectedActivities = [...activities].sort(() => Math.random() - 0.5).slice(0, 6);
+                selectedActivities.forEach(activity => {
+                    report += `
+    ${activity.name}:
+    ${name.split(' ')[0]} ${activity.comment}
+    `;
+                });
+    
+                report += `
+    Conclusión:
+    ${name.split(' ')[0]} ha mostrado un desempeño excepcional en todas las actividades de música. Su creatividad, participación activa y habilidad para colaborar en equipo han sido claves en su éxito durante este período.
+    
+    Recomendaciones:
+    Se recomienda seguir incentivando la participación de ${name.split(' ')[0]} en actividades interdisciplinarias que integren música y otras formas de expresión artística, ya que su creatividad puede desarrollarse aún más en estas experiencias.
+    
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    `;
+                allReports += report;
+            });
+    
+            output.innerHTML = `<pre>${allReports}</pre>`;
+        }
+    </script>
+    

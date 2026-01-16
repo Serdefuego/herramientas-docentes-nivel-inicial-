@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Secuencias Didácticas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 90vh;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            color: #008080;
+        }
+        .selectable-item {
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .selectable-item.selected {
+            background-color: #008080;
+            color: #fff;
+        }
+        .result {
+            margin-top: 20px;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #008080;
+            border-radius: 8px;
+            width: 100%;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #555;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #008080;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005f5f;
+        }
+        .cuadroUno, .Instrumentos, .Cancionero, .Contenidomusical {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .selectable-container{
+            text-align: center;
+        }
+
+        .cuadroUno{
+            
+
+        }
+        .result h3 {
+            margin-top: 0;
+            color: #008080;
+        }
+    </style>
+</head>
+<body>
+    <h1>Libro de temas de Música</h1>
+    <div class="container">
+        <div class="cuadroUno">
+          
+            <label for="cuentocantado">Cuento y cuentocanción:</label>
+            <div id="cuentocantado" class="selectable-container">
+
+                                    <H2>CUENTOS</H2>
+
+                <div class="selectable-item">CUENTO SONORIZADO</div>
+                <div class="selectable-item">CUENTO UN DIA DE RATÓN</div>
+                <div class="selectable-item">EL COCODRILO QUE MUERDE</div>
+                <div class="selectable-item">PINTO MI CARACOL</div>
+                <div class="selectable-item">UN POLLITO</div>
+
+                             <h2>AUDICION DE GRABACIONES</h2>
+
+                <div class="selectable-item">MASCARAS DE ANIMALES SONOROS</div>
+                <div class="selectable-item">TARGETA DE ANIMALES SONOROS</div>
+                <div class="selectable-item">ADIVINANZAS RÍTMICAS</div>
+                <div class="selectable-item">GRABAMOS NUESTRAS CANCIONES</div>
+                <div class="selectable-item">PAISAJE SONORO</div>
+                <div class="selectable-item">SONIDOS DE LA GRANJA</div>
+                <div class="selectable-item">SONIDOS DE LA CIUDAD</div>
+                <div class="selectable-item">SONIDOS DE LA NATURALEZA</div>
+                <div class="selectable-item">CINTAS RIMICAS DE COLORES</div>
+                <div class="selectable-item">BINGO DE ANIMALES</div>
+                <div class="selectable-item">BINGO DE INSTRUMENTOS MUSICALES</div>
+                <div class="selectable-item">LA MUSICA CLASICA</div>
+                <div class="selectable-item">AUDICION DE GRABACIONES¿CÓMO CANTAN LOS PÁJAROS?</div>
+                <div class="selectable-item">}GRABACION DE IMPROVIZACIONES</div>
+
+                                 <h2>JUEGOS RITMICOS</h2>
+
+                <div class="selectable-item">DIBUJO RÍTMICO</div>
+                <div class="selectable-item">JUEGO DE DEDOS RITMICOS</div>
+                <div class="selectable-item">MASA RITMICA</div>
+                <div class="selectable-item">BOLSITAS RITMICAS</div>
+                <div class="selectable-item">GRAFIA ANALÓGICA</div>
+                <div class="selectable-item">Charango, clave y candombe</div>
+            
+            </div>
+        </div>
+        <div class="Instrumentos">
+            <label for="instrumentos">Conociendo nuevos instrumentos:</label>
+            <div id="instrumentos" class="selectable-container">
+
+                <H2>INSTRUMENTOS DE CUERDA</H2>
+
+                <div class="selectable-item">LOS INSTRUMENTOS DE CUERDA</div>
+                <div class="selectable-item">LA GUITARRA</div>
+                <div class="selectable-item">EL CHARANGO</div>
+                <div class="selectable-item">EL UKELELE</div>
+                <div class="selectable-item">LA CITARA</div>
+
+                <H2>INSTRUMENTOS DE VIENTO</H2>
+
+                <div class="selectable-item">LOS INSTRUMENTOS DE VIENTO</div>
+                <div class="selectable-item">LA FLAUTA</div>
+                <div class="selectable-item">LA OCARINA</div>
+                <div class="selectable-item">LA QUENA</div>
+                <div class="selectable-item">LA FLAUTA DULCE</div>
+                <div class="selectable-item">LA FLAUTA TRAVERSA</div>
+                <div class="selectable-item">LA FLAUTA DE EMBOLO</div>
+                <div class="selectable-item">LA FLAUTA WISLE</div>
+                <div class="selectable-item">EL SIKUS</div>
+                <div class="selectable-item">EL DIDGERIDOO</div>
+                <div class="selectable-item">ASALATOS</div>
+                <div class="selectable-item">LOS TOC TOC</div>
+                <div class="selectable-item">LOS PALOS DE LLUVIA</div>
+                <div class="selectable-item">VASITOS RÍTMICOS</div>
+                <div class="selectable-item">EL TAMBOR DE TRUENO</div>
+                <div class="selectable-item">LLAVES SONORAS</div>
+                <div class="selectable-item">TUBOS SONOROS</div> 
+                <div class="selectable-item">LATITAS SONORAS</div>
+                <div class="selectable-item">MARACAS DE COLORES</div>
+                <div class="selectable-item">¿TAMBORES O BALDES?</div>
+                <div class="selectable-item">LAS SONAJAS DE CASCABELES</div>
+                <div class="selectable-item">EL DJAMBE</div>
+                <div class="selectable-item">EL SENCERRO</div>
+                <div class="selectable-item">EL REDOBLANTE</div>
+
+                <H2>INSTRUMENTOS DE PERCUSIÓN</H2>
+
+                <div class="selectable-item">LOS INSTRUMENTOS DE PERCUCIÓN</div>
+                <div class="selectable-item">EL TAMBOR</div>
+                <div class="selectable-item">EL XILÓFONO</div>
+                <div class="selectable-item">EL SAXOFÓN</div>              
+                <div class="selectable-item">LA ARMONICA</div>
+                <div class="selectable-item">EL PIANO</div>
+                <div class="selectable-item">EL KAZOO</div>
+                <div class="selectable-item">LA MARIMBA</div>      
+                <div class="selectable-item">EL ARPA DE BOCA</div>
+               
+            </div>
+        </div>
+        <div class="Cancionero">
+            <label for="canciones">Canciones:</label>
+            <div id="canciones" class="selectable-container">
+
+
+                <H2>CANCIONES ACUMULATIVAS</H2>
+
+                <div class="selectable-item">CANCIÓN"JAY UN BARCO EN EL FONDO DE LA MAR"</div>
+                <div class="selectable-item">CANCIÓN"LA CHIVITA"</div>
+                <div class="selectable-item">CARACOL COCODRILO</div>
+
+                <H2>CANCIONES PARA EXPRESION CORPORAL</H2>
+
+                <div class="selectable-item">CANCIÓN "LINDO PEZ"</div>
+                <div class="selectable-item">CANCIÓN "YO TENGO UN MOCO"</div>
+                <div class="selectable-item">CANCIÓN "JUAN PACO PEDRO"</div>
+                <div class="selectable-item">CANCIÓN "ARO ESPACIAL"</div>
+                <div class="selectable-item">CANCIÓN PARA LA RONDA</div>
+                <div class="selectable-item">CANCION "SALUDO AL SOL"</div>
+                <div class="selectable-item">CANCION "CANCIÓN UNA NUBE"</div>
+                <div class="selectable-item">CANCIÓN SOY UNA CERPIENTE</div>
+
+                <H2>CANCIONES CLASICAS</H2>
+
+                <div class="selectable-item">CANCION DE BIENVENIDA</div>
+                <div class="selectable-item">CANCION DE DESPEDIDA</div>
+                <div class="selectable-item">CANCION A ELECCION</div>
+                <div class="selectable-item">CANCIÓN "LOS PIRATAS"</div>
+                <div class="selectable-item">CANCIÓN "OMANA OEO"</div>
+                <div class="selectable-item">CANCIÓN "SEÑOR CARACOL"</div>
+                <div class="selectable-item">CANCIÓN "DE LOS DIENTES"</div>
+
+                <H2>CANCIONES PARA TRABAJAR ESI</H2>
+
+                <div class="selectable-item">CUENTO CANCIÓN “SECRETOS”</div>
+                <div class="selectable-item">CANCION "YO TENGO UNA CARITA”</div>
+
+                <H2>CANCIONES PARA EFEMERIDES</H2>
+
+                <div class="selectable-item">CANCIÓN "SAN MARTIN"</div>
+                <div class="selectable-item">CANCIÓN "MANUEL BELGRANO"</div>
+               
+               
+                <div class="selectable-item">CUENTO CANCIÓN EL OSO</div>
+                <div class="selectable-item">CUENTO CANCIÓN EL MAMBORETÁ</div>
+                <div class="selectable-item">CANCIÓN "Chumba la cachumba"</div>
+                <div class="selectable-item">CANCIÓN "Digo que si, digo que no"</div>
+                <div class="selectable-item">CANCIÓN PARA BAÑAR A LA LUNA</div>
+                <div class="selectable-item">CANCIÓN "MI AUTO BOCHINCHERO"</div>
+                <div class="selectable-item">CANCIÓN "EL GATO TOM"</div>
+                <div class="selectable-item">CANCIÓN "LA RISA DE LAS VOCALES"</div>
+                <div class="selectable-item">CANCION "MI CASITA"</div>
+                <div class="selectable-item">CANCION "LA GALLINA"</div>
+                <div class="selectable-item">CANCIÓN "APU EL INDIECITO"</div>
+                <div class="selectable-item">CANCION EL PAJARO CARPINTERO</div>
+                <div class="selectable-item">CANCIÓN "ERA UNA PALOMA"</div>
+                <div class="selectable-item">CANCIÓN CUAL ES TU NOMBRE</div>
+        
+            </div>
+        </div>
+        <div class="Contenidomusical">
+            <label for="contenidosMusicales">Contenidos Musicales:</label>
+            <div id="contenidosMusicales" class="selectable-container">
+
+                <H2>PROPUESTAS DE AUDIO PERCEPTIVA ,ESCUCHA DE GRABACIONES Y CUENTOS NARRADOS</H2>
+
+                <div class="selectable-item">sonidos del entorno natural y social</div>
+                <div class="selectable-item">Reconocimiento de otras voces</div>
+                <div class="selectable-item">Discriminación de voces de distinto registro</div>
+                <div class="selectable-item">escuchar ,reconocer e imitar Sonido 
+                    en el entorno sonoro natural y social</div>
+                <div class="selectable-item">Ubicacar el sonido en el espacio ,su  procedencia
+                        en diferentes distancias</div>
+                <div class="selectable-item">Rasgos distintivos del sonido, altura</div>
+                <div class="selectable-item">las posibilidades de la voz hablada</div>
+                <div class="selectable-item">La voz hablada: inflexiones, articulación, expresión.</div>
+
+                             
+                <H2>PROPUESTAS DE EJECUCION INSTRUMENTAL</H2>
+
+                <div class="selectable-item">los instrumentos convencionales y no convencionales</div>
+                <div class="selectable-item">Melodía, movimientos ascendentes y descendentes.</div>
+                <div class="selectable-item">Medios y modos de producción sonora</div>
+                <div class="selectable-item">El sonido en la música ritmo pulso y acento.</div>
+                <div class="selectable-item">Métrica regular e irregular</div>
+                <div class="selectable-item">La intensidad y duración</div>
+                <div class="selectable-item">Modos de acción para producir sonido</div>
+                <div class="selectable-item">Tiempo rápido y lento</div>
+                <div class="selectable-item">Ritmo métrica regular pulso y acento</div>
+                <div class="selectable-item">Los roles en la ejecución musical: solista y conjunto,
+                    en obras instrumentales y vocales.</div>
+
+                <H2>PROPUESTAS PARA CANCIONES E IMPROVISACIÓNES CANTADAS</H2>
+
+                <div class="selectable-item">Acercamiento al campo de la improvisación cantada o hablada.</div>
+                <div class="selectable-item">hablar y cantar otros sonidos vocales 
+                    (Chistidos tarareos Etcétera)</div>              
+                <div class="selectable-item">Interpretación del repertorio de canciones</div>
+                <div class="selectable-item">Los instrumentos convencionales y 
+                    no convencionales Para el canto individual y grupal.</div>
+                <div class="selectable-item">Sonidos derivados de la exploración de la cavidad bucal
+                    : susurros, silbidos, zumbidos, etc.</div>
+                <div class="selectable-item">Aprender sobre las caractiristicas vocales en diferentes estilos de canto</div>
+                <div class="selectable-item">Valorar y cuidar de la propia voz</div>
+                <div class="selectable-item">Exploración de la voz, el canto y la voz hablada</div>
+                <div class="selectable-item">Exploración de sonidos vocales</div>
+                <div class="selectable-item">Mejorar la emisión vocal</div>
+                <div class="selectable-item">Respetar las cualidades de canto de los demás</div>
+                <div class="selectable-item">Experimentar el Placer por el canto propio y compartido</div>
+                <div class="selectable-item">Experimentar diferentes Modos de acción para producir sonido</div>
+                <div class="selectable-item">Explorar la Relación entre materiales y propiedades sonoras</div>
+                <div class="selectable-item">Cooperar en el cuidado y mantenimiento del instrumental</div>
+             
+                
+                <H2>PROPUESTAS DE DIBUJO RITMICO , GRAFIAS ANALOGICAS Y MUSICOGRAMAS</H2>
+
+                <div class="selectable-item">Tiempo rápido y lento</div>
+                <div class="selectable-item">Ritmo métrica regular pulso y acento</div>
+                <div class="selectable-item">El sonido en la música ritmo pulso y acento.</div>
+                <div class="selectable-item">Métrica regular e irregular</div>
+                <div class="selectable-item">La intensidad y duración</div>
+                <div class="selectable-item">Melodía, movimientos ascendentes y descendentes.</div>
+
+                <H2>PROPUESTAS DE PERCUCION CORPORAL</H2>
+
+                <div class="selectable-item">los sonidos del propio cuerpo</div>
+                <div class="selectable-item">Exploración del cuerpo como productor de sonido.</div>
+            
+              
+           
+               
+               
+               
+               
+            
+            
+            </div>
+        </div>
+        
+        <div class="cuadroUno">
+          
+            <label for="Recursos">Recursos:</label>
+            <div id="Recursos" class="selectable-container">
+                <div class="selectable-item">Grabador</div>
+                <div class="selectable-item">Charanguito</div>
+                <div class="selectable-item">Toc Toc</div>
+                <div class="selectable-item">Latitas</div>
+                <div class="selectable-item">Cintas de colores</div>
+                <div class="selectable-item">Charango, clave y candombe</div>
+             
+            </div>
+        </div>
+        <div class="cuadroUno">
+          
+            <label for="propopuesta">Descripccion de la propuesta:</label>
+            <div id="propopuesta" class="selectable-container">
+                <div class="selectable-item">Instrumentos de cuerda (Guitarra, Charango, Ukelele): Se les enseña a los niños cómo se producen los sonidos al tocar las cuerdas. Se explora el ritmo y melodías sencillas.</div>
+                <div class="selectable-item">Instrumentos de viento (Saxofón, Sikus, Flautas): Los niños descubren cómo el aire genera sonido y aprenden a controlar la respiración para producir notas.</div>
+                <div class="selectable-item">Instrumentos de percusión (Tambor, Xilófono, Maracas): Se fomenta la coordinación rítmica mientras golpean o sacuden los instrumentos para hacer música.</div>
+                <div class="selectable-item">Instrumentos únicos (Didgeridoo, Kazoo, Arpa de boca): Se presentan para explorar sonidos característicos de distintas culturas.</div>
+                <div class="selectable-item">Canción de bienvenida/despedida: Ayudan a marcar el inicio y fin de la clase con una estructura rutinaria.</div>
+                <div class="selectable-item">Cuentos canción ("El oso", "El mamboretá"): Fomentan la imaginación, integrando narrativas con música</div>
+                <div class="selectable-item">Canciones de ronda ("San Martín", "Los piratas"): Promueven la colaboración en el canto grupal y el juego en equipo, con movimientos sincronizados.</div>
+                <div class="selectable-item">Canciones creativas y graciosas ("Yo tengo un moco", "La risa de las vocales"): Estimulan el sentido del humor y el uso lúdico del lenguaje.</div>
+                <div class="selectable-item">El Piano: Se utiliza para enseñar a los niños la coordinación entre ambas manos y la creación de melodías básicas, introduciéndolos a las teclas y sus diferentes sonidos.</div>
+                <div class="selectable-item">La Armónica: Los niños exploran cómo el aire y el movimiento de los labios pueden generar sonidos y melodías simples.</div>
+                <div class="selectable-item">El Djembé, Tambor de Trueno y Sencerro: escuchar ritmos africanos y latinoamericanos interpretados por el docente, estimulando la conexión entre el cuerpo y el ritmo.</div>
+                <div class="selectable-item">Los Tubos Sonoros y Palos de Lluvia:instrumentos no convencionales que introducen a los niños a nuevos tipos de sonidos naturales, como el sonido de la lluvia o el viento.</div>
+                <div class="selectable-item">los Toc Toc: ejecutan patrones rítmicos sencillos, trabajando la precisión y el control del tempo.</div>
+                <div class="selectable-item">La Ocarina y la Quena: Introducen a los niños a instrumentos de viento tradicionales, enseñándoles cómo diferentes culturas usan el aire para crear música. Se trabaja la respiración y la producción de sonidos agudos y graves.</div>
+                <div class="selectable-item">Llaves Sonoras, Latitas Sonoras y Vasitos Rítmicos: explorar timbricamente instrumentos reciclados y no convencionales que fomentan la creatividad, donde los niños experimentan con diferentes materiales para producir sonidos únicos.</div>
+                <div class="selectable-item">Las Sonajas de Cascabeles y Maracas de Colores: trabajar el ritmo y la coordinación de movimientos al sacudir los instrumentos.</div>
+                <div class="selectable-item">El Kazoo: explorar Un instrumento divertido que transforma la voz  en un sonido peculiar,  exploran cómo la vibración de la voz crea música.</div>
+                <div class="selectable-item">"Caracol cocodrilo": Fomenta la imaginación con una melodía alegre y pegajosa, invitando a los niños a cantar y moverse como los animales mencionados en la canción.</div>
+                <div class="selectable-item">"Cual es tu nombre": Ideal para el reconocimiento personal y social, los niños participan mencionando sus nombres, lo que promueve la confianza y el compañerismo.</div>
+                <div class="selectable-item">La Flauta Dulce : soplar de manera controlada y a producir diferentes notas</div>
+                <div class="selectable-item">La Flauta de Émbolo y la Flauta Wisle:experimentar con sonidos modulados al deslizar o soplar.</div>
+                <div class="selectable-item">Los Asalatos: desarrollar la coordinación mano-ojo y el sentido rítmico al girar y hacer sonar las bolas.</div>
+                <div class="selectable-item">La Marimba: explorar producir melodías sencillas,  golpear las teclas de madera para producir notas.</div>
+                <div class="selectable-item">¿Tambores o baldes?: experimentar con materiales comunes (como baldes) para crear sonidos percutivos, fomentando la improvisación y la exploración sonora con elementos cotidianos.</div>
+                <div class="selectable-item">"¿Cómo cantan los pájaros?": Introduce a los niños a los sonidos de la naturaleza, especialmente al canto de los pájaros, invitándolos a imitar esos sonidos con la voz o con pequeños instrumentos.</div>
+             
+            </div>
+        </div>
+        <button onclick="generarCuadro()">Generar Cuadro</button>
+        <button onclick="guardarResultado()">Guardar Resultado</button>
+        <div class="result" id="resultado">
+            <h3>El día de hoy, desarrollaremos las siguientes actividades:</h3>
+            <p><strong>Propuesta didacticas:</strong></p>
+            <ul id="resultadoSecuencia"></ul>
+            <p><strong>Contenidos Musicales:</strong></p>
+            <ul id="resultadoContenidos"></ul>
+            <p><strong>Recursos:</strong></p>
+            <ul id="resultadoRecursos"></ul>
+            <p><strong>breve descripccion de la propuesta:</strong></p>
+            <ul id="resultadoPropuesta"></ul>
+        </div>
+    </div>
+
+
+   <script>
+        // Event Listener para elementos seleccionables
+        document.querySelectorAll('.selectable-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('selected');
+            });
+        });
+
+        // Función para generar el cuadro de resultados
+        function generarCuadro() {
+            const cuentocantadoSeleccionados = obtenerElementosSeleccionados('cuentocantado');
+            const instrumentosSeleccionados = obtenerElementosSeleccionados('instrumentos');
+            const cancionesSeleccionadas = obtenerElementosSeleccionados('canciones');
+            const contenidosMusicalesSeleccionados = obtenerElementosSeleccionados('contenidosMusicales');
+            const recursosSeleccionados = obtenerElementosSeleccionados('Recursos')
+            const propuestaSeleccionados = obtenerElementosSeleccionados('propuesta')
+
+
+            mostrarElementosSeleccionados('resultadoSecuencia', cuentocantadoSeleccionados.concat(instrumentosSeleccionados, cancionesSeleccionadas));
+            mostrarElementosSeleccionados('resultadoContenidos', contenidosMusicalesSeleccionados);
+            mostrarElementosSeleccionados('resultadoRecursos', recursosSeleccionados);
+            mostrarElementosSeleccionados('resultadoPropuesta', propuestaSeleccionados);
+}
+
+        // Función para obtener elementos seleccionados
+        function obtenerElementosSeleccionados(id) {
+            return Array.from(document.querySelectorAll(`#${id} .selected`)).map(item => item.innerText);
+        }
+
+        // Función para mostrar elementos seleccionados en el cuadro de resultados
+        function mostrarElementosSeleccionados(contenedorId, elementos) {
+            const contenedor = document.getElementById(contenedorId);
+            contenedor.innerHTML = '';
+            elementos.forEach(elemento => {
+                const li = document.createElement('li');
+                li.textContent = elemento;
+                contenedor.appendChild(li);
+            });
+        }
+
+        // Función para guardar el resultado como archivo de texto
+        function guardarResultado() {
+            const fecha = new Date();
+            const fechaFormateada = `${fecha.getDate()}-${fecha.getMonth() + 1}-${fecha.getFullYear()}`;
+
+            const resultadoSecuencia = obtenerTextoLista('resultadoSecuencia');
+            const resultadoContenidos = obtenerTextoLista('resultadoContenidos');
+            const resultadoRecursos = obtenerTextoLista('resultadoRecursos');
+            const resultadoPropuesta = obtenerTextoLista('resultadoPropuesta');
+
+            const contenidoArchivo = `Fecha: ${fechaFormateada}\n\nUnidades Didácticas:\n${resultadoSecuencia}\n\nContenidos Musicales trabajados:\n${resultadoContenidos}\n\nRecursos utilizados:\n${resultadoRecursos}`;
+
+            descargarArchivo(contenidoArchivo, `Resultado_${fechaFormateada}.txt`);
+        }
+
+        // Función para obtener el texto de los elementos de una lista
+        function obtenerTextoLista(id) {
+            return Array.from(document.querySelectorAll(`#${id} li`)).map(li => li.textContent).join('\n');
+        }
+
+        // Función para descargar el archivo de texto
+        function descargarArchivo(contenido, nombreArchivo) {
+            const elementoDescarga = document.createElement('a');
+            elementoDescarga.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(contenido));
+            elementoDescarga.setAttribute('download', nombreArchivo);
+            elementoDescarga.style.display = 'none';
+            document.body.appendChild(elementoDescarga);
+            elementoDescarga.click();
+            document.body.removeChild(elementoDescarga);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Asistencia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f8;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007BFF;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+        }
+        .btn {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .attendance-list {
+            margin-top: 20px;
+        }
+        .attendance-list div {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+        .attendance-list label {
+            display: block;
+            margin: 5px 0;
+        }
+        .attendance-list input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .attendance-list input[type="checkbox"]:checked + label {
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Asistencia</h1>
+        
+        <div class="form-group">
+            <label for="color">Color:</label>
+            <select id="color" onchange="updateStudents()">
+                <option value="">Seleccione un color</option>
+                <option value="Violeta">Violeta</option>
+                <option value="Naranja">Naranja</option>
+                <option value="Verde">Verde</option>
+                <option value="Turquesa">Turquesa</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="turno">Turno:</label>
+            <select id="turno" onchange="updateStudents()">
+                <option value="">Seleccione un turno</option>
+                <option value="Mañana">Mañana</option>
+                <option value="Tarde">Tarde</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha">
+        </div>
+
+        <div id="attendance-list" class="attendance-list"></div>
+
+        <button class="btn" onclick="generateText()">Generar Texto</button>
+
+        <div id="output" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        const students = {
+            "Violeta": {
+                "Mañana": [
+                    "Mena Juan Ignacio", "Lancon Matheo Alan", "Soto Bastian Zadquiel", "Gerez Rodriguez Martina", "Fontana Ignacio Agustín",
+                    "Laz Lautaro Gabriel", "Guzman Agostina", "Sallago Leandro Kilians", "Lopez Silva Luz Andrea", "Deferrari Vittorio Tian",
+                    "Santucho Valentino", "Martinez Josias", "Ruiz Diaz Thiago Ezequiel", "Carrera Dos Santos Tiziano", "Dominguez Isabella",
+                    "Rodriguez Dante", "Corbellini Napole Liam", "Corbellini Napole Iker", "Juan Enrique Bibi", "Amarilla"
+                ],
+                "Tarde": [
+                    "Urbano Camilo", "Amarilla Valenzuela Santino Nicolás", "Baratti Roma Narella", "Celillo Noha Benjamín", "Conceicao DaRosa Cardozo",
+                    "Amaris Valquiria", "Córdoba Danna", "Curra Fabricio", "Errasti Theo Gael", "Fahuas Thiago Leon Mateo", "Gigle Milton Ian",
+                    "Gimenez Franchesca Catalina", "Lorenzo Xiara Olivia", "Mercado Bastian Santino", "Pasos Ihan Rafael", "Pozzuto Ciro",
+                    "Principe Mateo Nahuel", "Ramirez Milagros Elizabeth", "Santamaria Ramiro Ezequiel", "Saucedo Milena Aitana",
+                    "Tamagno Navarro Bastian", "Vezzosi Debian"
+                ]
+            },
+            "Naranja": {
+                "Mañana": [
+                    "Mariano Morales", "Ayala Sofía", "Castillo Valentina Jazmin", "Coronel Morinigo Rosario", "Darki Lorenzo Martín",
+                    "Falcon Benicio Nahuel", "Farinelli Santos Oriana", "Gamarra Malena Joaquina Mercedes", "Grosjean Stefano Ezequiel",
+                    "Guerrero Carlo Fernando", "Herrera Olivia Nahiara", "Huczek Mia Lujan", "Lobo Franchesca", "Massimino Ludmila Xiomara",
+                    "Montenegro Ambar Julieta", "Pozzuto Sara Eleonor", "Ruiz Diaz Eithan Asiel", "Urbanas Toledo Liam Tahiel", "Villar Juana Luciana"
+                ],
+                "Tarde": [
+                    "Acosta Noha Valentín", "Berón Santino Nicolas", "Comesaña Julián", "Connsuelo Juana Olivia", "Concettoni Noah Ezequiel",
+                    "Dejneka Thiago Benjamín", "Galvan Lautaro Ismael", "Gimenez Antonio Ismael", "Jara Lucila", "Jorge Doval Catalina",
+                    "Lopez Benicio Nehuel", "Lizarraga Olivia Josefina", "Llanos Jeremías Ezequiel", "Martinez Josias Israel", "Martinez Sarah",
+                    "Molina Dariel Jesus", "Montenegros Bastián", "Paredes Martinez Micaela", "Sanchez Esteban Germán", "Villalba Bautista Elian",
+                    "Ramoha Aaron Gabriel", "Urbano Salvador"
+                ]
+            },
+            "Verde": {
+                "Mañana": [
+                    "Amarilla Techeira Ciro Nehuen", "Aragon Niz Josefina", "Caballero Nehitan", "Carrera Dos Santos Renzo Apolo", "Cura Diaz Facundo",
+                    "De Leonardis Stavrakis Ethan", "Fernandez Maia Luana", "Gonzalez Pilar Estefania", "Klauss Ian Gael", "Lugo Ramirez Oriana Mariel",
+                    "Mamani Ceferina Pilar", "Oñate Leonardo Yonathan", "Piuselli Julian Valentin", "Puertas Lazaro", "Rodriguez Acuña Cataleya Rosario",
+                    "Serrano Amalia", "Sosa Martina Isabella", "Sotelo Isabella Alexa"
+                ],
+                "Tarde": [
+                    "Alvez Gennaro Adrian", "Amaya Joaquin Nicolas", "Avila Ambar Jazmin", "Blanco Bruno David", "Corsini Luna",
+                    "Gonzalez Ailin", "Gussoni Herrera Kaia", "Ferreyra Bryan Eithan", "Hernandez Malena Isabel", "Iberra Ezequiel Nicolas",
+                    "Martinez Elena", "Martinez Luney", "Vázquez Ramiro", "Ormeño Darlis Valentina Alejandra", "Peralta Tahiel Mateo",
+                    "Parrota Charo", "Pozzuto Ciro Alejandro", "Pueblas Grande Amelia", "Rivero Romina Milagros", "Sanchez Amy Alondra",
+                    "Sosa Eva Martina"
+                ]
+            },
+            "Turquesa": {
+                "Mañana": [
+                    "Cuello Isabella Rufina", "Corvalan Thaiel", "Farfaglia Jara Amapola Rosinna", "Ferreyra Renzo Agustín", "Garcia Tomas Nahuel",
+                    "Lambertini Bruno", "Lorbes Loan Uziel", "Maldonado Janna", "Quiroz Yuri Dilan", "Rueda Thiago", "Salgan Joaquin Andre",
+                    "Sanabria Fritz Henry Leonard", "Sandoval Elizabeth Elena", "Suarez Osorio Milagros", "Tealdi Mayra Jazmin", "Borghi Benicio Angel"
+                ],
+                "Tarde": [
+                    "Asturillo Ruiz Urzula Erika", "Aguirre Capel Alma Franca", "Baratti Zoe Aimara", "Buenrostro Erick Emmanuel", "Cesar Ambar Geraldine",
+                    "Cisneros Bella", "Cuevas Ortiz Clara", "Echeverria Gemma", "Ferreyra Ambar Antonela", "Gimenez Julieta Aymara", "Marquez Bastian Guillermo",
+                    "Monforte Chiarullo Lucio", "Montes de Oca Eylul Franchesca", "Nigro Abril Isabella", "Nucera Amara", "Montenegro Carlos Catriel",
+                    "Ormeño Jazmin Aylén", "Parodi Catia Isabella", "Quiroga Iris Alma Abril", "Ruiz Diaz Emilia Gianella", "Sanchez Sara Abigail",
+                    "Sotelo Santino Daniel", "Kylian Taylor", "Chamorro Nievas Martina", "Ferreyra Gomez Ariel Agustin"
+                ]
+            }
+        };
+
+        function updateStudents() {
+            const color = document.getElementById('color').value;
+            const turno = document.getElementById('turno').value;
+            const attendanceList = document.getElementById('attendance-list');
+
+            // Clear existing attendance list
+            attendanceList.innerHTML = '';
+
+            if (color && turno) {
+                const studentsList = students[color][turno];
+                studentsList.forEach(student => {
+                    const div = document.createElement('div');
+                    div.innerHTML = `
+                        <label>
+                            <input type="checkbox" name="${student}" value="Presente"> ${student} - Presente
+                        </label>
+                        <label>
+                            <input type="checkbox" name="${student}" value="Ausente"> Ausente
+                        </label>
+                    `;
+                    attendanceList.appendChild(div);
+                });
+            }
+        }
+
+        function generateText() {
+            const color = document.getElementById('color').value;
+            const turno = document.getElementById('turno').value;
+            const fecha = document.getElementById('fecha').value;
+            const output = document.getElementById('output');
+
+            if (color && turno && fecha) {
+                const checkboxes = document.querySelectorAll('#attendance-list input[type="checkbox"]');
+                let text = `Listado de alumnos para el día ${fecha} en el turno ${turno} de la sala ${color}:`;
+                
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        text += `\n${checkbox.parentElement.textContent.trim()} - ${checkbox.value}`;
+                    }
+                });
+
+                // Create a blob and download it as a .txt file
+                const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+                const fileName = `${color}_${turno}_${fecha}.txt`;
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                a.click();
+                URL.revokeObjectURL(url);
+
+                output.textContent = 'Archivo generado: ' + fileName;
+            } else {
+                output.textContent = 'Por favor, complete todos los campos.';
+            }
+        }
+    </script>
+</body>
+</html>
